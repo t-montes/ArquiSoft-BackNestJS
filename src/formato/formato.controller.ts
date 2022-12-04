@@ -21,6 +21,7 @@ export class FormatoController {
     @ApiOperation({ summary: 'Get all formatos' })
     @ApiOkResponse({ description: 'The formatos has been successfully retrieved.' })
     async findAll() {
+        console.log('GET /formato');
         return await this.formatoService.findAll();
     }
 
