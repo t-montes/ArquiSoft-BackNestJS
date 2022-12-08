@@ -1,0 +1,1 @@
+export { CreateFormatoDto } from './create-formato.dto';
