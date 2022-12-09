@@ -9,7 +9,7 @@ import {
     ApiParam,
 } from '@nestjs/swagger';
 import { FormatoService } from './formato.service';
-import { CreateFormatoDto } from './dto';
+import { CreateFormatoDto } from './dtos';
 
 @ApiTags('Formato')
 @Controller('formatos')
