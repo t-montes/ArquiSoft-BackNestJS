@@ -9,7 +9,7 @@ import {
     ApiParam,
 } from '@nestjs/swagger';
 import { FormatoService } from './formato.service';
-import { CreateFormatoDto } from './dtos';
+import { CreateFormatoDto, CreateCeldaDto } from './dtos';
 
 @ApiTags('Formato')
 @Controller('formatos')
@@ -31,7 +31,7 @@ export class FormatoController {
     @ApiParam({ name: 'id', description: 'Formato id' })
     @ApiOkResponse({ description: 'The formato has been successfully retrieved.' })
     async findOne(@Param('id') id: string) {
-        console.log('GET /formatos/' + id);
+        console.log('GET /formatos' + id);
         return await this.formatoService.findOne(id);
     }
 
@@ -42,6 +42,26 @@ export class FormatoController {
     async create(@Body() formato: CreateFormatoDto) {
         console.log('POST /formatos');
         return await this.formatoService.create(formato);
+    }
+
+    @Delete(':id')
+    @ApiOperation({ summary: 'Delete a formato by id' })
+    @ApiParam({ name: 'id', description: 'Formato id' })
+    @ApiBearerAuth()
+    @ApiOkResponse({ description: 'The formato has been successfully deleted.' })
+    async remove(@Param('id') id: string) {
+        console.log('DELETE /formatos/' + id);
+        return await this.formatoService.remove(id);
+    }
+
+    @Post(':id/celdas')
+    @ApiOperation({ summary: 'Add a celda to a formato' })
+    @ApiParam({ name: 'id', description: 'Formato id' })
+    @ApiBearerAuth()
+    @ApiCreatedResponse({ description: 'The celda has been successfully added.' })
+    async addCelda(@Param('id') id: string, @Body() celda: CreateCeldaDto) {
+        console.log('POST /formatos/' + id + '/celdas/');
+        return await this.formatoService.addCelda(id, celda);
     }
 
 }
